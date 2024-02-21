@@ -1,9 +1,6 @@
 import gpt
 
-messages = []
-
-
-def handle_response(message):
+def handle_response(messages_history, message):
     """Handle bot responses using chatgpt with openai api or automatic answers.
 
     Args:
@@ -12,12 +9,7 @@ def handle_response(message):
     prompt = str(message).lower()
     response = ""
 
-    if prompt == "clear history" or prompt == "clear":
-        messages.clear()
-        response = "Clear successfully!"
-        return response
-    elif prompt == "hi":
-        messages.clear()
+    if prompt == "hi":
         response = [
             "Hi! Welcome to the chatbot.",
             "You can start a private conversation by typing '?' followed by your message.",
@@ -35,7 +27,7 @@ def handle_response(message):
         response = "Goodbye! Have a great day!"
         return response
     else:
-        response = gpt.ask(messages, prompt)
-        messages.append({"role": "user", "content": message})
-        messages.append({"role": "assistant", "content": response})
+        response = gpt.ask(messages_history, prompt)
+        messages_history.append({"role": "user", "content": message})
+        messages_history.append({"role": "assistant", "content": response})
     return response

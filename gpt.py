@@ -8,7 +8,6 @@ API_KEY = os.environ.get("OPENAI_API_KEY")
 openai.api_key = API_KEY
 openai_model = os.environ.get("OPENAI_MODEL", "gpt-3.5-turbo-1106")
 
-
 def ask(messages_history, prompt, temperature=0, max_tokens=100):
     """Ask to gpt using a openai api with a model.
 
